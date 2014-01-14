@@ -1,14 +1,19 @@
 package com.speedruntools.racebot;
 
-import org.pircbotx.Configuration;
 import org.pircbotx.PircBotX;
 
 public class Main {
-	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public static void main(String[] args) throws Exception {
-		Configuration configuration = new Configuration.Builder().setName("SRTRaceBot").addListener(new SRTRaceBot()).setServerHostname("irc2.speedrunslive.com")
-				.addAutoJoinChannel("#srt").buildConfiguration();
-		new PircBotX(configuration);
+		PircBotX bot = new PircBotX();
+		bot.getListenerManager().addListener(new SRTRaceBot());
+		bot.setName("SrtRaceBot");
+		bot.setVerbose(true);
+		bot.setAutoReconnect(true);
+		bot.setAutoReconnectChannels(true);
+		bot.connect("irc.speedrunslive.com", 6667);
+		Thread.sleep(1000);
+		bot.joinChannel("#srt");
+		Thread.sleep(1000);
 	}
 
 }
