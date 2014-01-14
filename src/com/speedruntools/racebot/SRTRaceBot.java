@@ -12,6 +12,9 @@ public class SRTRaceBot extends ListenerAdapter {
 	}
 
 	public void onMessage(MessageEvent event) throws Exception {
+		if ((event.getMessage().toLowerCase()).contains("!startrace")) {
+			event.getBot().joinChannel("SRTTESTRACECHANNEL");
+		}
 
 		Thread.sleep(3000);
 	}
